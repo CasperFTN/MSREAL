@@ -85,24 +85,28 @@ int main ()
 
       //printf("Vrednosti tastera: %d %d %d %d \n",tval1,tval2,tval3,tval4);
 
-		
+	//---------------------------------------------------------
+	
       if(tval4 == 1 && sd1 == 0){
-	if(proizvod < 1){
+	sleep(0.02);
+	if(tval4 == 1){
+	if((proizvod + korak) < 1.1){
 	  proizvod = proizvod + korak;
 	  sd1 = 1;
-	}}
-      else
-	sd1 = 0; 
-		
+	}}}
+      else if(tval4 == 0){
+	sd1 = 0; }
       if(tval3 == 1 && sd2 == 0){
-	if(proizvod > 0){
+	sleep(0.02);
+	if(tval3 == 1){
+	if((proizvod - korak) > -0.01){
 	  proizvod = proizvod - korak;
-	  sd2 = 1;  }}
-      else
-	sd2 = 0;
-			
+	  sd2 = 1;  }}}
+      else if(tval3 == 0){
+	sd2 = 0;}
 
-   
+
+
   //----------------------------------------------------------------
 
   // Upali diode
@@ -126,6 +130,8 @@ int main ()
     printf("Problem pri zatvaranju /dev/led\n");
     return -1; }
   usleep((1-proizvod)*period);
+  printf("Procenat osvetljenja: %f \n",proizvod);
+  sleep(0.5);
 
 }
 }
